@@ -1,2 +1,2 @@
-# terrafrom-live
+# terraform-live
 terraform environment configurations
