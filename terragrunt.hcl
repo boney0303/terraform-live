@@ -27,8 +27,11 @@ generate "provider" {
   contents  = <<EOF
 provider "aws" {
   region = "${local.aws_region}"
-  # Only these AWS Account IDs may be operated on by this template
-  allowed_account_ids = ["${local.account_id}"]
+  # aws assume role to provision the module
+  assume_role {
+    role_arn = var.tf_role_arn
+    session_name = "AWSCLI-Session"
+  }
 }
 EOF
 }
@@ -38,7 +41,7 @@ remote_state {
   backend = "s3"
   config = {
     encrypt        = true
-    bucket         = "devops-s3-us-east-1/terraform-state"
+    bucket         = "devops-tf-us-east-1"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = local.aws_region
     dynamodb_table = "terraform-locks"

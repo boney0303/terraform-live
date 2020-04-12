@@ -1,6 +1,7 @@
 locals {
   # Automatically load environment-level variables
   environment_vars = read_terragrunt_config(find_in_parent_folders("env.hcl"))
+  #environment_vars = yamldecode(file("${find_in_parent_folders("env.hcl")}"))
 
   # Extract out common variables for reuse
   env = local.environment_vars.locals.environment
@@ -9,8 +10,13 @@ locals {
 # Terragrunt will copy the Terraform configurations specified by the source parameter, along with any files in the
 # working directory, into a temporary folder, and execute your Terraform commands in that folder.
 terraform {
-  source = "git::git@github.com:boney0303/terraform-modules.git//ec2?ref=v0.1.0"
+  #source = "https://github.com/boney0303/terraform-modules.git//ec2"
+  source = "git::git@github.com:boney0303/terraform-modules.git//ec2"
+  #source = "../../../../../terraform-modules//ec2"
 }
+
+#to prevent from terragrunt destroy
+#prevent_destroy = true
 
 # Include all settings from the root terragrunt.hcl file
 include {
