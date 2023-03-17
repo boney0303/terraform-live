@@ -1,0 +1,3 @@
+tf-modules:
+  source: "git@github.com:boney0303/terraform-modules.git"
+  version: "v1.0.0"
