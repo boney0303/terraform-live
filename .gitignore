@@ -2,6 +2,7 @@
 *.iml
 .terraform*
 .terragrunt-cache
+terragrunt-debug.tfvars.json
 tf-modules/
 .DS_Store
 plugins/.DS_Store
